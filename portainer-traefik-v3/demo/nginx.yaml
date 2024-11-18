@@ -1,8 +1,6 @@
 services:
   nginx:
     image: nginx:latest
-    ports:
-      - 8082:8082
     networks:
       - public
     deploy:
@@ -11,14 +9,13 @@ services:
       placement:
         constraints: [ node.role == manager ]
       labels:
-        - "traefik.enable=true"
-        - "traefik.docker.network=public"
-        - "traefik.http.routers.nginx.rule=Host(`nginx.gabrielmelo.shop`)"
-        - "traefik.http.routers.nginx.entrypoints=websecure"
-        - "traefik.http.routers.nginx.tls.certresolver=leresolver"
-        - "traefik.http.routers.nginx.service=nginx"
-        - "traefik.http.services.nginx.loadbalancer.server.port=8082"
+        - traefik.enable=true
+        - traefik.http.routers.nginx-http.rule=Host(`nginx.gabrielmelo.shop`)
+        - traefik.http.routers.nginx-http.entrypoints=web
+        - traefik.http.routers.nginx-https.tls=true
+        - traefik.http.routers.nginx-https.tls.certresolver=leresolver
+        - traefik.http.routers.nginx-https.entrypoints=websecure
+        - traefik.http.routers.nginx-https.rule=Host(`nginx.gabrielmelo.shop`)
 networks:
   public:
     external: true
-    attachable: true
