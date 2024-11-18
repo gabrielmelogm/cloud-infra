@@ -25,3 +25,16 @@ certificatesResolvers:
       storage: /letsencrypt/acme.json
       httpChallenge:
         entryPoint: web
+
+http:
+  routers:
+    api:
+      rule: Host(`traefik.gabrielmelo.shop`)
+      service: api@internal
+      middlewares:
+        - auth
+  middlewares:
+    auth:
+      basicAuth:
+        users:
+          - "admin:$2y$05$R/fJVZL1wjSFnqWLstMnr.AdRmuMxcLrNkdDgPFe4H2RqFK97LjDq"
