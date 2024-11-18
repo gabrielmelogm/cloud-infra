@@ -5,7 +5,6 @@ log:
   level: ERROR
 api:
   dashboard: true
-  insecure: false
 entryPoints:
   web:
     address: :80
@@ -28,8 +27,8 @@ certificatesResolvers:
 
 http:
   routers:
-    api:
-      rule: Host(`traefik.gabrielmelo.shop`)
+    dashboard:
+      rule: Host(`traefik.gabrielmelo.shop`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
       service: api@internal
       middlewares:
         - auth
