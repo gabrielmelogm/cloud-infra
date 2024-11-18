@@ -4,10 +4,6 @@ services:
     command:
       - --api.insecure=true
       - --providers.docker
-      - --entryPoints.websecure.address=:443
-      - --certificatesresolvers.leresolver.acme.tlschallenge=true
-      - --certificatesresolvers.leresolver.acme.email=dev.gabrielmelo.shop
-      - --certificatesresolvers.leresolver.acme.storage=/letsencrypt/acme.json
     ports:
       - "80:80"
       - "443:443"
@@ -21,7 +17,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
-      - ./letsencrypt:/letsencrypt
   
 networks:
   public:

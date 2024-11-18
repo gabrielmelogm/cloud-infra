@@ -11,8 +11,17 @@ entryPoints:
     address: :80
   websecure:
     address: :443
+
 providers:
   swarm:
     endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false
     network: public
+
+certificatesResolvers:
+  leresolver:
+    acme:
+      email: dev.gabrielmelo@gmail.com
+      storage: acme.json
+      httpChallenge:
+        entryPoint: web
