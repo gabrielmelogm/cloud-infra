@@ -1,8 +1,6 @@
 services:
   nginx:
     image: nginx:latest
-    ports:
-      - 8082:8082
     networks:
       - public
     deploy:
@@ -17,7 +15,6 @@ services:
         - "traefik.http.routers.nginx.entrypoints=websecure"
         - "traefik.http.routers.nginx.tls.certresolver=leresolver"
         - "traefik.http.routers.nginx.service=nginx"
-        - "traefik.http.services.nginx.loadbalancer.server.port=8082"
 networks:
   public:
     external: true
