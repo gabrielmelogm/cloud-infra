@@ -22,6 +22,6 @@ certificatesResolvers:
   leresolver:
     acme:
       email: dev.gabrielmelo@gmail.com
-      storage: acme.json
+      storage: /letsencrypt/acme.json
       httpChallenge:
         entryPoint: web
