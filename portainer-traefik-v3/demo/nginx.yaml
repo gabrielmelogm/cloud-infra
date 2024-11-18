@@ -6,7 +6,10 @@ services:
     networks:
       - public
     deploy:
+      mode: replicated
       replicas: 1
+      placement:
+        constraints: [ node.role == manager ]
       labels:
         - "traefik.enable=true"
         - "traefik.docker.network=public"
@@ -18,3 +21,4 @@ services:
 networks:
   public:
     external: true
+    attachable: true
