@@ -1,0 +1,14 @@
+services:
+  nginx:
+    image: nginx:latest
+    networks:
+      - public
+    deploy:
+      replicas: 1
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.nginx-http.rule=Host(`nginx.gabrielmelo.shop`)
+        - traefik.http.routers.nginx-http.entrypoints=web
+networks:
+  public:
+    external: true
