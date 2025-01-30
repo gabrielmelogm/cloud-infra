@@ -15,7 +15,7 @@ services:
           - node.role == manager
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
+      - ./config/dynamic_config.yaml:/etc/traefik/traefik.yaml:ro
       - ./letsencrypt:/letsencrypt
   
 networks:
