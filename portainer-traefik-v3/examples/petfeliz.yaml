@@ -1,0 +1,20 @@
+services:
+  petfeliz:
+    image: gabrielmelogm/petfeliz:master
+    networks:
+      - public
+    deploy:
+      mode: replicated
+      replicas: 1
+      
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.petfeliz.rule=Host(`petfeliz.gabrielmelo.shop`)"
+        - "traefik.http.routers.petfeliz.entrypoints=websecure"
+        - "traefik.http.routers.petfeliz.tls.certresolver=leresolver"
+        - "traefik.http.services.petfeliz.loadbalancer.server.port=80"
+
+networks:
+  public:
+    external: true
+    attachable: true
